@@ -1,0 +1,1 @@
+# stali_smart_city
