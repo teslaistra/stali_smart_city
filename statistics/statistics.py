@@ -72,4 +72,4 @@ class SocialStatisticsCalculator:
         """
         complaints = self.sqlighter.get_weighted_complaints_proportion(city_id, indicator_id)
         answers = self.sqlighter.get_weighted_complaints_proportion(city_id, indicator_id)
-        return (complaints * complaints_impact_level + answers * (1 - complaints_impact_level)) * 12
+        return ((complaints * complaints_impact_level + answers * (1 - complaints_impact_level)) + 1) * 6
