@@ -12,6 +12,7 @@
 ```
 pip install uvicorn
 pip install fastapi
+pip install scikit-learn
 pip install joblib
 ```
 **Как выполнять основные операции** 
@@ -37,9 +38,11 @@ http://127.0.0.1:8000/login/?login=user&password=pass
 
 В server.py Вы можете найти более развернутые примеры запросов, основанных на тестовых данных из БД. 
 
+**Как получать статистику с сервера**
+
+Интерфейс для работы со статистикой реализован в файле statistics/statistics.py.
 
 **Сборка мобильного приложения**
-
 
 Проект написан на Flutter. Используйте flutter build для сборки проекта.
 
