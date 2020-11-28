@@ -1,18 +1,10 @@
+import joblib
 import re
-
-from sklearn.pipeline import Pipeline
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-
 
 class TextModel:
 
     def __init__(self):
-        self.classifier = Pipeline([
-            ('vect', CountVectorizer(ngram_range=(1,2))),
-            ('tfidf', TfidfTransformer(norm='l2', use_idf=True)),
-            ('clf', MultinomialNB(alpha=1))
-        ])
+        self.classifier = joblib.load('model.pkl')
 
     def preprocess_text_(self, text):
         text = text.lower().replace("ё", "е")
