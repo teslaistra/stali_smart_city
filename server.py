@@ -18,7 +18,7 @@ async def login(login: str, password: str):
     :param password: Пароль пользователя
     :return: результат логина
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
 
     is_registred = db_worker.get_user(login, password)
 
@@ -35,7 +35,7 @@ async def read_coords(user_id: float):
     :param user_id: номер пользователя
     :return: список рубрик(опросов)
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
     survey = db_worker.get_survies(user_id)
     result = {}
     for a in survey:
@@ -52,7 +52,7 @@ async def top_initiatives():
     Получение списка инициатив
     :return: вернет список инициатив
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
     initiatives = db_worker.get_initiatives()
 
     return initiatives
@@ -65,7 +65,7 @@ async def send_complaint(text: str, user_id: float):
     :param text: Текст жалобы
     :param user_id: Номер пользователя
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
     db_worker.send_complaint(text, user_id)
     db_worker.close()
 
@@ -78,7 +78,7 @@ async def get_questions(rubric_id: int):
     :param rubric_id: Номер рубрики
     :return: Список вопросов из этой рубрики
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
     return db_worker.get_questions(rubric_id)
 
 
@@ -90,7 +90,7 @@ async def send_free_answer(text: str, question_id: int, user_id: int):
     :param question_id: Номер вопроса
     :param user_id: Номер пользователя
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
 
     predicter = TextModel()
     prediction = predicter.predict([text])
@@ -108,7 +108,7 @@ async def send_variant_answer(variant_id: str, question_id: int, user_id: int):
     :param question_id: Номер вопроса
     :param user_id: Номер пользователяд
     """
-    db_worker = SQLighter("hell.db")
+    db_worker = SQLighter("database.db")
 
     db_worker.send_variant_answer(variant_id, question_id, user_id)
     db_worker.close()
