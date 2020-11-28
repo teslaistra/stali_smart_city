@@ -12,6 +12,7 @@ async def root():
     return {"message": "Hello World"}
 
 
+# Логин в приложение через внутренний аккаунт
 @app.get("/login/")
 async def login(login: str, password: str):
     db_worker = SQLighter("hell.db")
@@ -23,6 +24,7 @@ async def login(login: str, password: str):
     return result
 
 
+# Получение списка опросов
 @app.get("/top_survies/")
 async def read_coords(user_id: float):
     db_worker = SQLighter("hell.db")
@@ -36,6 +38,7 @@ async def read_coords(user_id: float):
     return result
 
 
+# Получение списка инициатив
 @app.get("/top_initiatives/")
 async def read_coords():
     db_worker = SQLighter("hell.db")
@@ -44,6 +47,7 @@ async def read_coords():
     return initiatives
 
 
+# Отправка жалобы
 @app.get("/send_complaint/")
 async def send_complaint(text: str, user_id: float):
     db_worker = SQLighter("hell.db")
@@ -51,12 +55,14 @@ async def send_complaint(text: str, user_id: float):
     db_worker.close()
 
 
+# Получить вопросы в конкретной рубрике
 @app.get("/get_questions/")
 async def get_questions(rubric_id: int):
     db_worker = SQLighter("hell.db")
     return db_worker.get_questions(rubric_id)
 
 
+# Отправка ответа в свободной форме на вопрос
 @app.get("/send_free_answer/")
 async def send_free_answer(text: str, question_id: int, user_id: int):
     db_worker = SQLighter("hell.db")
@@ -68,7 +74,7 @@ async def send_free_answer(text: str, question_id: int, user_id: int):
     db_worker.send_free_answer(text, question_id, result_prediction, user_id)
     db_worker.close()
 
-
+# Отправка ответа в виде варианта ответа на вопрос
 @app.get("/send_variant_answer/")
 async def send_variant_answer(variant_id: str, question_id: int, user_id: int):
     db_worker = SQLighter("hell.db")
