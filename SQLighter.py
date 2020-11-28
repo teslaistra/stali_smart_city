@@ -1,7 +1,5 @@
 import sqlite3
-import random
 import datetime
-import numpy as np
 
 
 class SQLighter:
@@ -79,11 +77,14 @@ class SQLighter:
                                                "answers": ""}
         return result
 
-
-
-    def update_last_time(self, house_id):
+    def send_free_answer(self, text, question_id, result_prediction, user_id):
         self.cursor.execute(
-            f"UPDATE pictures SET UPDATE_DATE = '{datetime.datetime.now().replace(microsecond=0)}' where HOUSE_ID = {house_id}")
+            f"INSERT INTO answered_questions_free (user_id, text,classification,answered_question_id) VALUES({user_id},'{text}', '{result_prediction}','{question_id}')")
+        self.connection.commit()
+
+    def send_variant_answer(self, variant_id, question_id, user_id):
+        self.cursor.execute(
+            f"INSERT INTO answered_questions_variants (user_id, variant_id ,answered_question_id) VALUES({user_id}, '{variant_id}','{question_id}')")
         self.connection.commit()
 
     def close(self):
