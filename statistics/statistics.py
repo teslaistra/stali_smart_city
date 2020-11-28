@@ -1,19 +1,4 @@
-import sqlite3
-import random
-import datetime
-import numpy as np
-
-
-
-
-class SQLighter:
-
-    def __init__(self, database):
-        self.connection = sqlite3.connect(database)
-        self.cursor = self.connection.cursor()
-
-
-
+from SQLighter import SQLighter
 
 class SocialStatisticsCalculator:
 
