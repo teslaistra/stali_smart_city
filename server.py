@@ -64,7 +64,8 @@ async def send_complaint(text: str, user_id: float):
     db_worker.send_complaint(text, user_id)
     db_worker.close()
 
-#@app.get("/get_questions/")
-#async def get_questions(rubric_id: int):
-    #db_worker = SQLighter("hell.db")
-    #db_worker.get_questions(text, user_id)
+@app.get("/get_questions/")
+async def get_questions(rubric_id: int):
+    db_worker = SQLighter("hell.db")
+    return db_worker.get_questions(rubric_id)
+

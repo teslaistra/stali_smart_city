@@ -59,6 +59,28 @@ class SQLighter:
             f"INSERT INTO complaints (text, user_id ) VALUES('{text}',{int(user_id)})")
         self.connection.commit()
 
+    def get_questions(self, rubric_id):
+        obj = self.cursor.execute(
+            f"SELECT text, is_free_answers,question_id FROM questions where rubrick_id = '{rubric_id}'")
+        questions = obj.fetchall()
+        result = {}
+        for i, question in enumerate(questions):
+
+            if question[1] == "FALSE":
+                obj = self.cursor.execute(f"SELECT text, variant_id FROM variants where question_id = '{question[2]}'")
+                variants = obj.fetchall()
+                variants_arr = []
+                for var in variants:
+                    variants_arr.append({"text": var[0], "variant_id": var[1]})
+                result["question" + str(i)] = {"question_id": question[2], "question_text": question[0],
+                                               "answers": variants_arr}
+            else:
+                result["question" + str(i)] = {"question_id": question[2], "question_text": question[0],
+                                               "answers": ""}
+        return result
+
+
+
     def update_last_time(self, house_id):
         self.cursor.execute(
             f"UPDATE pictures SET UPDATE_DATE = '{datetime.datetime.now().replace(microsecond=0)}' where HOUSE_ID = {house_id}")
