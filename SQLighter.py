@@ -9,6 +9,12 @@ class SQLighter:
         self.cursor = self.connection.cursor()
 
     def get_user(self, login, password):
+        """
+        Существует ли искомый пользователь
+        :param login: Логин пользователя
+        :param password: Пароль пользователя
+        :return: Истина если пользователь существует и ложь если не существует
+        """
         obj = self.cursor.execute(f"SELECT * FROM users WHERE LOGIN = '{login}' AND PASSWORD = '{password}'")
 
         if len(obj.fetchall()) == 0:
@@ -17,20 +23,30 @@ class SQLighter:
             return True
 
     def get_valid_questions(self, user_id):
+        """
+        Поиск тех рубрик, которые доустпны для прохождения опроса пользователем
+        :param user_id: Номер пользователя
+        :return: вернет список номеров валидных рубрик
+        """
         age = self.cursor.execute(f"SELECT age FROM users where UID = '{user_id}'").fetchall()[0][0]
-        print("found age =", age)
+
         obj = self.cursor.execute(
             f"SELECT rubrick_id FROM questions where target_age_min < '{age}' and target_age_max > '{age}'")
         valid_rubricks = []
+
         for rubrick in obj.fetchall():
             print(rubrick[0])
             if not rubrick[0] in valid_rubricks:
                 valid_rubricks.append(rubrick[0])
 
-        print(valid_rubricks)
         return valid_rubricks
 
     def get_survies(self, user_id):
+        """
+        Получение рубрик
+        :param user_id: Номмер пользователя
+        :return: Вернет названия и описания доступных рубрик
+        """
         rubricks = []
         rubrick_ids = self.get_valid_questions(user_id)
         for rubrick in rubrick_ids:
@@ -39,6 +55,10 @@ class SQLighter:
         return rubricks
 
     def get_initiatives(self):
+        """
+        Список инициатив
+        :return: вернет список инициатив
+        """
         obj = self.cursor.execute(
             f"SELECT short_description, long_description,votes_up, votes_down, author_id  FROM initiatives where is_approved = 'YES'")
         initiatives_result = obj.fetchall()
@@ -53,11 +73,21 @@ class SQLighter:
         return result
 
     def send_complaint(self, text, user_id):
+        """
+        Отправка жалобы
+        :param text: Текст жалобы
+        :param user_id: Номер пользователя
+        """
         self.cursor.execute(
             f"INSERT INTO complaints (text, user_id ) VALUES('{text}',{int(user_id)})")
         self.connection.commit()
 
     def get_questions(self, rubric_id):
+        """
+        Получит вопросы определенной рубрики
+        :param rubric_id: Номер рубрики
+        :return: вернет список вопросов в рубрике и тип варианта ответа на них
+        """
         obj = self.cursor.execute(
             f"SELECT text, is_free_answers,question_id FROM questions where rubrick_id = '{rubric_id}'")
         questions = obj.fetchall()
