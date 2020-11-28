@@ -14,7 +14,7 @@
 
 Каждый вопрос имеет собственный вес и в соответствии с ним влияет на соответствующий мнению по выбранному субиндексу показатель. Значение показателя для одного субиндекса может быть вычислено по формулам:
 <p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\frac{\sum_{q\in%20Q}W_q\sum_{v\in%20V_q}w_v%20s_v%20+%20\sum_{q\in%20Q}W_q\sum_{a\in%20A_q}p_a}{\sum%20W_q}\}" /> 
+  <img src="https://latex.codecogs.com/svg.latex?\frac{\sum_{q\in%20Q}W_q\sum_{v\in%20V_q}w_v%20s_v%20+%20\sum_{q\in%20Q}W_q\sum_{a\in%20A_q}p_a}{\sum%20W_q}" /> 
 </p>
 
 
