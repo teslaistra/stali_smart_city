@@ -24,7 +24,8 @@
 </p>
 
 Здесь:
-<img src="https://latex.codecogs.com/svg.latex?Q"/> -- множество вопросов;
+- <img src="https://latex.codecogs.com/svg.latex?Q"/> - множество вопросов;
+- <img src="https://latex.codecogs.com/svg.latex?V_q"/> - множество вопросов;
 
 ## FAQ
 
