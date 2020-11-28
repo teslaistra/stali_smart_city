@@ -25,7 +25,13 @@
 
 Здесь:
 - <img src="https://latex.codecogs.com/svg.latex?Q"/> - множество вопросов;
-- <img src="https://latex.codecogs.com/svg.latex?V_q"/> - множество вопросов;
+- <img src="https://latex.codecogs.com/svg.latex?C"/> - множество жалоб;
+- <img src="https://latex.codecogs.com/svg.latex?V_q"/> - множество вариантов ответов на вопрос <img src="https://latex.codecogs.com/svg.latex?q"/>;
+- <img src="https://latex.codecogs.com/svg.latex?A_q"/> - множество ответов на вопрос <img src="https://latex.codecogs.com/svg.latex?q"/> в свободной форме;
+- <img src="https://latex.codecogs.com/svg.latex?W_q\in[0, 1]"/> - вес вопроса <img src="https://latex.codecogs.com/svg.latex?q"/>;
+- <img src="https://latex.codecogs.com/svg.latex?w_v\in[0, 1]"/> - положительность варианта <img src="https://latex.codecogs.com/svg.latex?v"/> (задается вручную);
+- <img src="https://latex.codecogs.com/svg.latex?s_v"/> - доля выбравших вариант <img src="https://latex.codecogs.com/svg.latex?v"/> пользователей среди всех проголосовавших;
+- <img src="https://latex.codecogs.com/svg.latex?p_a\in[0, 1]"/> - оценка тональности текста.
 
 ## FAQ
 
