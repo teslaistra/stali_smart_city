@@ -10,6 +10,7 @@ async def root():
     return {"message": "Hello World"}
 
 
+# Пример запроса: http://127.0.0.1:8000/login/?login=user&password=pass
 @app.get("/login/")
 async def login(login: str, password: str):
     """
@@ -27,7 +28,7 @@ async def login(login: str, password: str):
     return result
 
 
-#
+# Пример запроса: http://127.0.0.1:8000/top_survies/?user_id=1
 @app.get("/top_survies/")
 async def read_coords(user_id: float):
     """
@@ -46,6 +47,7 @@ async def read_coords(user_id: float):
     return result
 
 
+# Пример запроса: http://127.0.0.1:8000/top_initiatives/
 @app.get("/top_initiatives/")
 async def top_initiatives():
     """
@@ -58,6 +60,7 @@ async def top_initiatives():
     return initiatives
 
 
+# Пример запроса: http://127.0.0.1:8000/send_complaint/?text=anything%20here&user_id=1
 @app.get("/send_complaint/")
 async def send_complaint(text: str, user_id: float):
     """
@@ -70,7 +73,7 @@ async def send_complaint(text: str, user_id: float):
     db_worker.close()
 
 
-#
+# Пример запроса: http://127.0.0.1:8000/get_questions/?rubric_id=1
 @app.get("/get_questions/")
 async def get_questions(rubric_id: int):
     """
@@ -82,6 +85,7 @@ async def get_questions(rubric_id: int):
     return db_worker.get_questions(rubric_id)
 
 
+# Пример запроса: http://127.0.0.1:8000/send_free_answer/?text=anything_here&question_id=1&user_id=1
 @app.get("/send_free_answer/")
 async def send_free_answer(text: str, question_id: int, user_id: int):
     """
@@ -100,6 +104,7 @@ async def send_free_answer(text: str, question_id: int, user_id: int):
     db_worker.close()
 
 
+# Пример запроса: http://127.0.0.1:8000/send_variant_answer/?variant_id=13&question_id=1&user_id=1
 @app.get("/send_variant_answer/")
 async def send_variant_answer(variant_id: str, question_id: int, user_id: int):
     """
