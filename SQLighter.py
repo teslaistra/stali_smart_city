@@ -108,11 +108,24 @@ class SQLighter:
         return result
 
     def send_free_answer(self, text, question_id, result_prediction, user_id):
+        """
+        Вставка в БД ответа в свободной форме
+        :param text: Текст ответа
+        :param question_id: Номер вопроса
+        :param result_prediction: Результат предсказания тональности ответа
+        :param user_id: Номер пользователя
+        """
         self.cursor.execute(
             f"INSERT INTO answered_questions_free (user_id, text,classification,answered_question_id) VALUES({user_id},'{text}', '{result_prediction}','{question_id}')")
         self.connection.commit()
 
     def send_variant_answer(self, variant_id, question_id, user_id):
+        """
+        Вставка в БД ответа в виде варианта ответа на вопрос
+        :param variant_id: Номер варианта
+        :param question_id: Номер вопроса
+        :param user_id: Номер пользователя
+        """
         self.cursor.execute(
             f"INSERT INTO answered_questions_variants (user_id, variant_id ,answered_question_id) VALUES({user_id}, '{variant_id}','{question_id}')")
         self.connection.commit()
