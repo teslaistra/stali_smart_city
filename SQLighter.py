@@ -155,6 +155,9 @@ class SQLighter:
         weighted_sum = 0.0  # взвешенная сумма по всем вопросам и ответам
         total_weight = 0.0  # суммарный вес всех вопросов
 
+        if len(questions) == 0:
+            return None
+
         for q in questions:
             total_weight += float(q[1])
 
@@ -169,7 +172,8 @@ class SQLighter:
                 variant_sum += float(weight) * unique_variants[v]
                 total_votes += unique_variants[v]
 
-            weighted_sum += variant_sum / total_votes * float(q[1])
+            if total_votes != 0:
+                weighted_sum += variant_sum / total_votes * float(q[1])
 
             free_answers = self.cursor.execute(
                 f"SELECT classification FROM answered_questions_free WHERE city_id = '{city_id}' AND answered_question_id = '{q[0]}'").fetchall()
@@ -178,9 +182,12 @@ class SQLighter:
             for c in free_answers:
                 free_sum += float(c[0]) * 2 - 1
 
-            weighted_sum += free_sum / len(free_answers) * float(q[1])
+            if len(free_answers) > 0:
+                weighted_sum += free_sum / len(free_answers) * float(q[1])
 
-        return weighted_sum / total_weight
+        if total_weight != 0:
+            weighted_sum /= total_weight
+        return weighted_sum
 
     def close(self):
         """ Закрываем текущее соединение с БД """
